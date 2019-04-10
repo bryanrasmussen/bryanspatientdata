@@ -1,12 +1,28 @@
 
-const Header = ({ title }) => `
+const Header = (title) => `
     <head>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
       <link rel="icon" href="/favicon.ico" />
       <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.css'>
       <style type
       ="text/css">
+        body {
+            max-width: auto;
+        }
+        .appiframe {
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            right: 0px;
+            width: 100%;
+            border: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            z-index: 999999;
+            height: 100%;
+        }
         header {
             margin-left: -10px;
         }
@@ -23,7 +39,7 @@ const Header = ({ title }) => `
             color: darkblue;
             margin-bottom: .5rem;
         }
-        .searchForm input {
+        .searchForm input, .searchform select {
             border: 1px solid darkblue;
             background-color: white;
             color: darkblue;
@@ -34,6 +50,9 @@ const Header = ({ title }) => `
         .submit {
             background-color: darkblue;
             min-width: 100px;
+        }
+        .submit:hover {
+            color: white;
         }
 
         .searchResult {

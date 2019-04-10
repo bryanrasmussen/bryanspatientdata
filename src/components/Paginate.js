@@ -1,10 +1,10 @@
 import React from 'react';
-import url from 'url';
+
 
 class Paginate extends React.Component {
   
   render() {
-    const qs = url.parse(window.location.href, true).query;
+    const qs = this.props.query;
     const currentPage = (qs.page) ? Number(qs.page) : 0;
     
     const returnQs = (page) => {
@@ -15,7 +15,7 @@ class Paginate extends React.Component {
     const paginationLink = (page, text) => {
         if (page < 0) { return null}
         return <li className="paginationLink">
-            <a itemProp="url" href={'/?' + returnQs(page)}>
+            <a itemProp="url" href={'/?' + returnQs(page)} target="_parent">
               <span itemProp="name">{text}</span>
             </a> 
         </li>;

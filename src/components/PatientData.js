@@ -1,6 +1,7 @@
 import React from 'react';
 import Paginate from './Paginate';
 import SearchForm from './SearchForm';
+import url from 'url';
 
 class PatientData extends React.Component {
 
@@ -34,8 +35,9 @@ class PatientData extends React.Component {
          <p className="totalpayments">Average Total Payments: {item['Average Total Payments']}</p>
         </section>
       </li>
-    })
-    const paginator = <Paginate/>;
+    });
+    const qs = (this.props.query) ? this.props.query : url.parse(window.location.href, true).query;
+    const paginator = <Paginate query={qs}/>;
     return <React.Fragment>
         
         <header>

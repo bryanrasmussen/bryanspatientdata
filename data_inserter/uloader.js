@@ -7,7 +7,6 @@ if (!admin || !pass) {
     console.log('you have not provided an admin or password');
     console.log('we will continue with out');
 }
-
 const nano = require('nano')((!admin || !pass) ? 
 'http://localhost:5984' : 'http://' + admin + ':' + pass + '@localhost:5984');
 const readline = require('readline').createInterface({

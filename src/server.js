@@ -3,11 +3,11 @@ require('babel-register')({
     presets: ['es2015', 'react']
 });
 import express from 'express';
-import React from 'react';
+import querystring from 'querystring';
 import { renderToString } from 'react-dom/server';
 import App from './server/App';
 import FrontendRender from './server/FrontendRender';
-import Analysis from './server/Analysis';
+import Analyzer from './server/Analyzer';
 import BackendRender from './server/BackendRender';
 import fs from 'fs';
 import * as Nano from "nano";
@@ -141,11 +141,10 @@ server.get('/providers', (req, res) => {
 
 server.get('/analyzeQuery', (req, res) => {
   loadProviders(req, (result, query) => {
-    const title = 'Patient Data Overview';
     const message = {query, result};
    
     res.send(
-      Analysis(
+      Analyzer(
         {title, message}
       )
     );
@@ -153,10 +152,10 @@ server.get('/analyzeQuery', (req, res) => {
 });
 
 server.get('/', (req, res) => {
-  const title = 'Patient Data Overview';
+  const q = querystring.stringify(req.query);
   res.send(
     FrontendRender(
-      {title}
+      {q}
     )
   );
   
@@ -164,12 +163,11 @@ server.get('/', (req, res) => {
 
 server.get('/serverside', (req, res) => {
   loadProviders(req, (result) => {
-    const body = renderToString(React.createElement(App, {serverSide: true, providerData: result.docs}));
-    const title = 'Patient Data Overview';
+    const body = renderToString(App(true, result, req.query));
     res.send(
       BackendRender(
-        {body,
-        title}
+        {body
+      }
       )
     );
   });

@@ -27263,8 +27263,6 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _url = _interopRequireDefault(require("url"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -27303,8 +27301,7 @@ function (_React$Component) {
   _createClass(Paginate, [{
     key: "render",
     value: function render() {
-      var qs = _url["default"].parse(window.location.href, true).query;
-
+      var qs = this.props.query;
       var currentPage = qs.page ? Number(qs.page) : 0;
 
       var returnQs = function returnQs(page) {
@@ -27325,7 +27322,8 @@ function (_React$Component) {
           className: "paginationLink"
         }, _react["default"].createElement("a", {
           itemProp: "url",
-          href: '/?' + returnQs(page)
+          href: '/?' + returnQs(page),
+          target: "_parent"
         }, _react["default"].createElement("span", {
           itemProp: "name"
         }, text)));
@@ -27349,7 +27347,7 @@ function (_React$Component) {
 var _default = Paginate;
 exports["default"] = _default;
 
-},{"react":14,"url":21}],26:[function(require,module,exports){
+},{"react":14}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27362,6 +27360,8 @@ var _react = _interopRequireDefault(require("react"));
 var _Paginate = _interopRequireDefault(require("./Paginate"));
 
 var _SearchForm = _interopRequireDefault(require("./SearchForm"));
+
+var _url = _interopRequireDefault(require("url"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -27427,8 +27427,11 @@ function (_React$Component) {
           className: "totalpayments"
         }, "Average Total Payments: ", item['Average Total Payments'])));
       });
+      var qs = this.props.query ? this.props.query : _url["default"].parse(window.location.href, true).query;
 
-      var paginator = _react["default"].createElement(_Paginate["default"], null);
+      var paginator = _react["default"].createElement(_Paginate["default"], {
+        query: qs
+      });
 
       return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement("header", null, _react["default"].createElement("h1", null, "Patient Data")), _react["default"].createElement(_SearchForm["default"], {
         serverside: this.props.serverside
@@ -27442,7 +27445,7 @@ function (_React$Component) {
 var _default = PatientData;
 exports["default"] = _default;
 
-},{"./Paginate":25,"./SearchForm":27,"react":14}],27:[function(require,module,exports){
+},{"./Paginate":25,"./SearchForm":27,"react":14,"url":21}],27:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27505,16 +27508,19 @@ function (_React$Component) {
       /*the show/hide search toggle should only show up in small 
       screens, the idea is that the search form takes up a lot of the screen
       and the user should have the ability to collapse it when they are are not 
-      searching.*/
+      searching.
+      the use of target is in the case of serverside rendering
+      */
       var showSearchText = this.state.showSearchForm ? 'Hide Search' : 'Show Search';
       return _react["default"].createElement("div", {
         className: "searchForm",
         role: "search"
       }, _react["default"].createElement("form", {
         method: "GET",
-        action: "/"
+        action: "/",
+        target: "_parent"
       }, !this.props.serverSide && _react["default"].createElement("p", {
-        "class": "SearchToggler",
+        className: "SearchToggler",
         "aria-hidden": "true"
       }, _react["default"].createElement("button", {
         type: "button",
@@ -27577,11 +27583,112 @@ function (_React$Component) {
         id: "min_average_medicare_payments"
       }))), _react["default"].createElement("p", null, _react["default"].createElement("label", {
         htmlFor: "state"
-      }, "State"), _react["default"].createElement("input", {
-        type: "text",
+      }, "State"), _react["default"].createElement("select", {
         name: "state",
         id: "state"
-      })), _react["default"].createElement("input", {
+      }, _react["default"].createElement("option", {
+        value: "AL"
+      }, "Alabama"), _react["default"].createElement("option", {
+        value: "AK"
+      }, "Alaska"), _react["default"].createElement("option", {
+        value: "AZ"
+      }, "Arizona"), _react["default"].createElement("option", {
+        value: "AR"
+      }, "Arkansas"), _react["default"].createElement("option", {
+        value: "CA"
+      }, "California"), _react["default"].createElement("option", {
+        value: "CO"
+      }, "Colorado"), _react["default"].createElement("option", {
+        value: "CT"
+      }, "Connecticut"), _react["default"].createElement("option", {
+        value: "DE"
+      }, "Delaware"), _react["default"].createElement("option", {
+        value: "DC"
+      }, "District Of Columbia"), _react["default"].createElement("option", {
+        value: "FL"
+      }, "Florida"), _react["default"].createElement("option", {
+        value: "GA"
+      }, "Georgia"), _react["default"].createElement("option", {
+        value: "HI"
+      }, "Hawaii"), _react["default"].createElement("option", {
+        value: "ID"
+      }, "Idaho"), _react["default"].createElement("option", {
+        value: "IL"
+      }, "Illinois"), _react["default"].createElement("option", {
+        value: "IN"
+      }, "Indiana"), _react["default"].createElement("option", {
+        value: "IA"
+      }, "Iowa"), _react["default"].createElement("option", {
+        value: "KS"
+      }, "Kansas"), _react["default"].createElement("option", {
+        value: "KY"
+      }, "Kentucky"), _react["default"].createElement("option", {
+        value: "LA"
+      }, "Louisiana"), _react["default"].createElement("option", {
+        value: "ME"
+      }, "Maine"), _react["default"].createElement("option", {
+        value: "MD"
+      }, "Maryland"), _react["default"].createElement("option", {
+        value: "MA"
+      }, "Massachusetts"), _react["default"].createElement("option", {
+        value: "MI"
+      }, "Michigan"), _react["default"].createElement("option", {
+        value: "MN"
+      }, "Minnesota"), _react["default"].createElement("option", {
+        value: "MS"
+      }, "Mississippi"), _react["default"].createElement("option", {
+        value: "MO"
+      }, "Missouri"), _react["default"].createElement("option", {
+        value: "MT"
+      }, "Montana"), _react["default"].createElement("option", {
+        value: "NE"
+      }, "Nebraska"), _react["default"].createElement("option", {
+        value: "NV"
+      }, "Nevada"), _react["default"].createElement("option", {
+        value: "NH"
+      }, "New Hampshire"), _react["default"].createElement("option", {
+        value: "NJ"
+      }, "New Jersey"), _react["default"].createElement("option", {
+        value: "NM"
+      }, "New Mexico"), _react["default"].createElement("option", {
+        value: "NY"
+      }, "New York"), _react["default"].createElement("option", {
+        value: "NC"
+      }, "North Carolina"), _react["default"].createElement("option", {
+        value: "ND"
+      }, "North Dakota"), _react["default"].createElement("option", {
+        value: "OH"
+      }, "Ohio"), _react["default"].createElement("option", {
+        value: "OK"
+      }, "Oklahoma"), _react["default"].createElement("option", {
+        value: "OR"
+      }, "Oregon"), _react["default"].createElement("option", {
+        value: "PA"
+      }, "Pennsylvania"), _react["default"].createElement("option", {
+        value: "RI"
+      }, "Rhode Island"), _react["default"].createElement("option", {
+        value: "SC"
+      }, "South Carolina"), _react["default"].createElement("option", {
+        value: "SD"
+      }, "South Dakota"), _react["default"].createElement("option", {
+        value: "TN"
+      }, "Tennessee"), _react["default"].createElement("option", {
+        value: "TX"
+      }, "Texas"), _react["default"].createElement("option", {
+        value: "UT"
+      }, "Utah"), _react["default"].createElement("option", {
+        value: "VT"
+      }, "Vermont"), _react["default"].createElement("option", {
+        value: "VA"
+      }, "Virginia"), _react["default"].createElement("option", {
+        value: "WA"
+      }, "Washington"), _react["default"].createElement("option", {
+        value: "WV"
+      }, "West Virginia"), _react["default"].createElement("option", {
+        value: "WI"
+      }, "Wisconsin"), _react["default"].createElement("option", {
+        value: "WY"
+      }, "Wyoming"))), _react["default"].createElement("input", {
         className: "submit",
         type: "submit",
         value: "Search"
