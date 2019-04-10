@@ -13,7 +13,7 @@ class SearchForm extends React.Component {
   }
   
   onToggleSearchForm() {
-    setState({showSearchForm: !this.state.showSearchForm});
+    this.setState({showSearchForm: !this.state.showSearchForm});
   }
 
   render() {

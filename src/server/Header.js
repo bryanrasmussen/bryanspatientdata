@@ -39,14 +39,16 @@ const Header = (title) => `
             color: darkblue;
             margin-bottom: .5rem;
         }
-        .searchForm input, .searchform select {
+        .searchForm input, .searchform select, .SearchToggler button{
             border: 1px solid darkblue;
             background-color: white;
             color: darkblue;
             max-width: 75px;
             width: 50&;
         }
-        
+        .SearchToggler button {
+            max-width: 100px;
+        }
         .submit {
             background-color: darkblue;
             min-width: 100px;
@@ -87,7 +89,13 @@ const Header = (title) => `
                 right: inherit;
                 height: auto;
             }
-            .SearchToggler {display: block}
+
+            .SearchToggler {
+                display: block;
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
       </style>
       <title>${title}</title>

@@ -7,16 +7,6 @@ class PatientData extends React.Component {
 
   constructor(props) {
     super(props);
-
-    // using this binding due to the same react code running on both client and server
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-  
-  onSubmit(event) {
-    event.preventDefault();
-    const city = event.target.elements.city.value;
-    
-    this.props.onSubmit(city);
   }
 
   render() {
