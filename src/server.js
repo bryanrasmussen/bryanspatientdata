@@ -12,9 +12,7 @@ import BackendRender from './server/BackendRender';
 import fs from 'fs';
 import * as Nano from "nano";
 
-const environment = process.env.NODE_ENV || 'development';
-
-const port = (environment === 'development') ? 3000 : 80;
+const port = process.env.PORT || 3000;
 const server = express();
 
 const loadProviders = (req, cb) => {
